@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>WebSocket Test</title>
+</head>
+<body>
+    <h1>WebSocket Test</h1>
+    <div>
+        <input type="text" id="token" placeholder="Enter your token" size="50" />
+        <button onclick="connect()">Connect</button>
+    </div>
+    <div>
+        <input type="text" id="documentId" placeholder="Document ID" size="36" />
+        <button onclick="sendMessage()">Send Message</button>
+    </div>
+    <pre id="output" style="height: 300px; overflow: auto; border: 1px solid #ccc; padding: 10px;"></pre>
+
+    <script>
+        let ws = null;
+        
+        function log(message) {
+            const output = document.getElementById('output');
+            output.textContent += message + '\n';
+            output.scrollTop = output.scrollHeight;
+        }
+        
+        function connect() {
+            const token = document.getElementById('token').value;
+            const docId = document.getElementById('documentId').value;
+            
+            if (!token || !docId) {
+                log('Please enter token and document ID');
+                return;
+            }
+            
+            const wsUrl = `ws://localhost:8000/ws/${docId}?token=${token}`;
+            log(`Connecting to: ${wsUrl}`);
+            
+            ws = new WebSocket(wsUrl);
+            
+            ws.onopen = () => {
+                log('✅ WebSocket connected!');
+                ws.send(JSON.stringify({ type: 'presence', data: { status: 'online' } }));
+            };
+            
+            ws.onmessage = (event) => {
+                const data = JSON.parse(event.data);
+                log(`📨 Received: ${JSON.stringify(data, null, 2)}`);
+            };
+            
+            ws.onerror = (error) => {
+                log(`❌ WebSocket error: ${error}`);
+            };
+            
+            ws.onclose = (event) => {
+                log(`🔌 WebSocket closed: ${event.code} - ${event.reason}`);
+            };
+        }
+        
+        function sendMessage() {
+            if (ws && ws.readyState === WebSocket.OPEN) {
+                ws.send(JSON.stringify({ type: 'test', message: 'Hello!' }));
+                log('📤 Sent test message');
+            } else {
+                log('WebSocket is not connected');
+            }
+        }
+    </script>
+</body>
+</html>

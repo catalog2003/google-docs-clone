@@ -1,0 +1,66 @@
+/* Editor specific styles - kept minimal to avoid conflicts */
+.ql-editor {
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.ql-editor h1 {
+  font-size: 2em;
+  margin: 0.67em 0;
+}
+
+.ql-editor h2 {
+  font-size: 1.5em;
+  margin: 0.75em 0;
+}
+
+.ql-editor h3 {
+  font-size: 1.17em;
+  margin: 0.83em 0;
+}
+
+.ql-editor p {
+  margin: 0 0 1em 0;
+}
+
+.ql-editor ul, .ql-editor ol {
+  padding-left: 1.5em;
+  margin: 0 0 1em 0;
+}
+
+.ql-editor li {
+  margin: 0.5em 0;
+}
+
+.ql-editor blockquote {
+  border-left: 4px solid #ccc;
+  margin: 0 0 1em 0;
+  padding-left: 1em;
+  color: #666;
+}
+
+.ql-editor code {
+  background-color: #f4f4f4;
+  padding: 2px 4px;
+  border-radius: 3px;
+  font-family: monospace;
+}
+
+.ql-editor pre {
+  background-color: #f4f4f4;
+  padding: 1em;
+  border-radius: 4px;
+  overflow-x: auto;
+  margin: 0 0 1em 0;
+}
+
+.ql-editor a {
+  color: #1a73e8;
+  text-decoration: underline;
+}
+
+.ql-editor img {
+  max-width: 100%;
+  height: auto;
+}
